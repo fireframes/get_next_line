@@ -6,13 +6,13 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 21:05:26 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/11 20:36:45 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/12 23:43:55 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <fcntl.h>
-#include "get_next_line.h"
+#include "get_next_line/get_next_line.h"
 #include <string.h>
 #include <stdlib.h>
 
@@ -26,7 +26,7 @@ int main(void)//int argc, char *argv[])
 	// char *input = argv[1];
 	// printf("%s\n", input);
 
-	char *file = "weesperplein.txt";
+	char *file = "../weesperplein.txt";
 	int fd = open(file, O_RDONLY);
 
 	if (fd == -1)
@@ -40,12 +40,18 @@ int main(void)//int argc, char *argv[])
 	// line1 = get_next_line(fd);
 	// printf("%s", line1);
 	// free(line1);
-	while ((line1 = get_next_line(fd)) != NULL)
+	int i = 0;
+	while (i < 30)
 	{
+		line1 = get_next_line(fd);
 		if (line1 == NULL)
-			printf("Aborted function or EOF\n");
+		{	
+			printf("Aborted function or EOF\n");	
+			break ;
+		}
 		printf("%s", line1);
 		free(line1);
+		i++;
 	}
 
 	close(fd);
