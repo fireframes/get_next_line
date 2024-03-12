@@ -6,7 +6,7 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 20:32:21 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/12 23:45:28 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:00:01 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,39 +26,41 @@ char	*get_next_line(int fd)
 	char			*line;
 
 	line = NULL;
+	
 	if (fd < 0)// || BUFFER_SIZE > 65536) //Can it be more?
 		return (NULL);
+		
 	line_len = 0;
 	read_ret = 1;
+	
 	while (i < BUFFER_SIZE)
 	{
-		if (i >= BUFFER_SIZE) // Added check to prevent buffer overflow
+		read_ret = read(fd, &buffer[i], sizeof(char));
+		
+		if (read_ret <= 0)
 		{
 			i = 0;
+			ft_memset(buffer, '\0', sizeof(buffer));
 			return (NULL);
 		}
-		read_ret = read(fd, &buffer[i], sizeof(char));
-		if (read_ret < 0)
-			return (NULL);
-		if (read_ret == 0)
-			break ;	
+			
 		if (buffer[i] == '\n' || buffer[i] == '\0')
 		{
 			i++;
 			line_len++;
 			start = &buffer[i - line_len];
-			if (line_len == 1 && start[0] == '\n') // Empty line
-			{
-				line = (char *) malloc(2 * sizeof(char));
-				if (line == NULL)
-				{
-					free(line);
-					return (NULL);
-				}
-				line[0] = '\n';
-				line[1] = '\0';
-				break ;
-			}
+			// if (line_len == 1 && start[0] == '\n') // Empty line
+			// {
+			// 	line = (char *) malloc(2 * sizeof(char));
+			// 	if (line == NULL)
+			// 	{
+			// 		free(line);
+			// 		return (NULL);
+			// 	}
+			// 	line[0] = '\n';
+			// 	line[1] = '\0';
+			// 	break ;
+			// }
 			line = (char *) malloc((line_len + 1) * sizeof(char));
 			if (line == NULL)
 			{
@@ -70,6 +72,12 @@ char	*get_next_line(int fd)
 		}
 		line_len++;
 		i++;
+		if (i >= BUFFER_SIZE) // Added check to prevent buffer overflow
+		{
+			i = 0;
+			ft_memset(buffer, '\0', sizeof(buffer));
+			return (NULL);
+		}
 	}
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 20:32:42 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/11 20:29:47 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/13 00:59:01 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
+void	*ft_memset(void *s, int c, size_t n);
 
 #endif

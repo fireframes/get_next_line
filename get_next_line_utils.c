@@ -6,7 +6,7 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 20:33:01 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/11 15:57:04 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/13 00:58:53 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,17 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 		dest[i] = '\0';
 	}
 	return (ft_strlen(src));
+}
+
+void	*ft_memset(void *s, int c, size_t n)
+{
+	void	*s_tmp;
+
+	s_tmp = s;
+	while (n--)
+	{
+		*(unsigned char *)s_tmp = (unsigned char) c;
+		s_tmp++;
+	}
+	return (s);
 }
