@@ -6,7 +6,7 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 21:05:26 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/13 00:45:17 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:54:22 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,21 @@ int main(void)//int argc, char *argv[])
 		printf("CAN'T OPEN FILE!\n");
 		return (-1);
 	}
-	// else
-	// 	printf("OPENED FILE FD: %d\n", fd);
 	char *line1;
-	// line1 = get_next_line(fd);
-	// printf("%s", line1);
-	// free(line1);
+	// int fd = open("/home/mmaksimo/francinette/tests/get_next_line/gnlTester/files/41_no_nl", O_RDWR);
+
+	// char *line1 = get_next_line(fd);
+
+	// if (!strcmp(line1,"01234567890123456789012345678901234567890"))
+	// 	printf("strings diff!\n");
+
 	int i = 0;
 	while (i < 30)
 	{
 		line1 = get_next_line(fd);
 		if (line1 == NULL)
-		{	
-			printf("Aborted function or EOF\n");	
+		{
+			printf("NULL or EOF\n");
 			break ;
 		}
 		printf("%s", line1);
