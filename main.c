@@ -6,7 +6,7 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 21:05:26 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/18 22:14:12 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:33:36 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,21 @@ int main(void)//int argc, char *argv[])
 		return (-1);
 	}
 	char *line1;
+
 	// line1 = get_next_line(fd);
 	// printf("%s", line1);
 	// free(line1);
+
 	int i = 0;
-	while (i < 30)
+	while (i < 5)
 	{
 		line1 = get_next_line(fd);
 		if (line1 == NULL)
-		{	
-			printf("Aborted function or EOF\n");	
+		{
+			printf("NULL or EOF\n");
 			break ;
 		}
-		printf("%s", line1);
+		printf("---%s", line1);
 		free(line1);
 		i++;
 	}
