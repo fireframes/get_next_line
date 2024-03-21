@@ -6,7 +6,7 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 20:33:01 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/19 23:16:46 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/21 18:34:58 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,63 +57,64 @@ size_t	ft_strlcpy(char *dest, char *src, size_t size)
 	return (ft_strlen(src));
 }
 
-char	*ft_strdup(char *s, size_t len)
+char	*ft_strendup(char *s_start, char *s_end)
 {
-	char	*dest;
+	char	*s_out;
+	size_t	len;
 
-	dest = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (dest == NULL)
+	len = s_end - s_start + 1;
+	s_out = malloc(sizeof(char) * (len + 1));
+	if (s_out == NULL)
 		return (NULL);
-	ft_strlcpy(dest, s, len);
-	return (dest);
+	ft_strlcpy(s_out, s_start, len);
+	return (s_out);
 }
 
-size_t	ft_strlcat(char *dest, char *src, size_t size)
+void	ft_strcat(char *dest, char *src)
 {
 	size_t	i;
 	size_t	j;
 	size_t	dest_len;
+	size_t	total_len;
 
 	dest_len = ft_strlen(dest);
-	if (size <= dest_len)
-		return (ft_strlen(src) + size);
+	total_len = dest_len + ft_strlen(src);
 	i = dest_len;
 	j = 0;
-	while (i < (size - 1) && src[j] != '\0')
+	while (i < total_len && src[j] != '\0')
 	{
 		dest[i] = src[j];
 		j++;
 		i++;
 	}
 	dest[i] = '\0';
-	return (dest_len + ft_strlen(src));
 }
 
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*joined;
-	size_t	join_len;
+// char	*ft_strjoin(char *s1, char *s2)
+// {
+// 	char	*joined;
+// 	size_t	join_len;
 
 
-	join_len = ft_strlen(s1) + ft_strlen(s2) + 1;
+// 	join_len = ft_strlen(s1) + ft_strlen(s2) + 1;
 
-	joined = (char *)malloc(join_len * sizeof(char));
+// 	joined = (char *)malloc(join_len * sizeof(char));
 
-	if (joined == NULL)
-		return (NULL);
-	ft_strcpy(joined, s1);
-	if (s1)
-		free(s1);
-	ft_strlcat(joined, s2, join_len);
-	return (joined);
-}
+// 	if (joined == NULL)
+// 		return (NULL);
+// 	ft_strcpy(joined, s1);
+// 	if (s1)
+// 		free(s1);
+// 	ft_strcat(joined, s2, join_len);
+// 	return (joined);
+// }
 
 char	*ft_strchr(char *s, int c)
 {
 	unsigned int	i;
 
 	i = 0;
-	
+
 	while (s[i])
 	{
 		if (s[i] == (char) c)
