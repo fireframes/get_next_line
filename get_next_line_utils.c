@@ -6,7 +6,7 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 20:33:01 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/21 18:34:58 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/22 18:54:23 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ size_t	ft_strlen(char *s)
 {
 	size_t	len;
 
-	if (!s)
-		return (0);
 	len = 0;
-	while (s[len])
-		len++;
+
+	if (s)
+		while (s[len])
+			len++;
 	return (len);
 }
 
@@ -57,18 +57,29 @@ size_t	ft_strlcpy(char *dest, char *src, size_t size)
 	return (ft_strlen(src));
 }
 
-char	*ft_strendup(char *s_start, char *s_end)
+char	*ft_strdup(char *s)
 {
-	char	*s_out;
-	size_t	len;
+	char	*dest;
 
-	len = s_end - s_start + 1;
-	s_out = malloc(sizeof(char) * (len + 1));
-	if (s_out == NULL)
+	dest = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (dest == NULL)
 		return (NULL);
-	ft_strlcpy(s_out, s_start, len);
-	return (s_out);
+	ft_strcpy(dest, s);
+	return (dest);
 }
+
+// char	*ft_strendup(char *s_start, char *s_end)
+// {
+// 	char	*s_out;
+// 	size_t	len;
+
+// 	len = s_end - s_start + 1;
+// 	s_out = malloc(sizeof(char) * (len + 1));
+// 	if (s_out == NULL)
+// 		return (NULL);
+// 	ft_strlcpy(s_out, s_start, len);
+// 	return (s_out);
+// }
 
 void	ft_strcat(char *dest, char *src)
 {
@@ -90,24 +101,23 @@ void	ft_strcat(char *dest, char *src)
 	dest[i] = '\0';
 }
 
-// char	*ft_strjoin(char *s1, char *s2)
-// {
-// 	char	*joined;
-// 	size_t	join_len;
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*joined;
+	size_t	join_len;
 
+	join_len = ft_strlen(s1) + ft_strlen(s2) + 1;
 
-// 	join_len = ft_strlen(s1) + ft_strlen(s2) + 1;
+	joined = (char *) malloc(join_len * sizeof(char));
 
-// 	joined = (char *)malloc(join_len * sizeof(char));
-
-// 	if (joined == NULL)
-// 		return (NULL);
-// 	ft_strcpy(joined, s1);
-// 	if (s1)
-// 		free(s1);
-// 	ft_strcat(joined, s2, join_len);
-// 	return (joined);
-// }
+	if (joined == NULL)
+		return (NULL);
+	ft_strcpy(joined, s1);
+	// if (s1 != NULL)
+	// 	free(s1);
+	ft_strcat(joined, s2);
+	return (joined);
+}
 
 char	*ft_strchr(char *s, int c)
 {
@@ -124,6 +134,29 @@ char	*ft_strchr(char *s, int c)
 	if (s[i] == (char) c)
 		return (&s[i]);
 	return (0);
+}
+void	*ft_memmove(void *dest, const void *src, size_t n)
+{
+	unsigned char		*dest_tmp;
+	const unsigned char	*src_tmp;
+
+	if (!dest && !src)
+		return (NULL);
+	dest_tmp = dest;
+	src_tmp = src;
+	if (dest_tmp < src_tmp)
+	{
+		while (n--)
+			*dest_tmp++ = *src_tmp++;
+	}
+	else
+	{
+		dest_tmp += n;
+		src_tmp += n;
+		while (n--)
+			*--dest_tmp = *--src_tmp;
+	}
+	return (dest);
 }
 
 void	*ft_memset(void *s, int c, size_t n)

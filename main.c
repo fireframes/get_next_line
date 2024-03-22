@@ -6,7 +6,7 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 21:05:26 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/21 23:24:53 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/22 19:16:02 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 
 int main(void)
 {
-	char *file = "weesperplein.txt";
+	char *file = "lines_around_10.txt";
+
 	int fd = open(file, O_RDONLY);
 
 	if (fd == -1)
@@ -27,22 +28,31 @@ int main(void)
 		return (-1);
 	}
 
-	char *line1;
+	char *line;
+	line = get_next_line(fd);
+	printf("%s", line);
+	free(line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	free(line);
 
-	int i = 0;
-	while (i < 20)
-	{
-		line1 = get_next_line(fd);
-		if (line1 == NULL)
-		{
-			printf("NULL or EOF\n");
-			break ;
-		}
-		printf("%s", line1);
-		free(line1);
-		i++;
-	}
-
+	// int i = 0;
+	// while (1)
+	// {
+	// 	line = get_next_line(fd);
+	// 	if (line == NULL)
+	// 		break ;
+	// 	// size_t i = 0;
+	// 	// while (i < ft_strlen(line))
+	// 	// {
+	// 	// 	if (line[i] == '\n')
+	// 	// 		printf("char: %d\n", line[i]);
+	// 	// 	i++;
+	// 	// }
+	// 	printf("%s", line);
+	// 	free(line);
+	// 	// i++;
+	// }
 	close(fd);
 	return (0);
 }
