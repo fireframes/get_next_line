@@ -44,7 +44,7 @@ int main(void)
 	// }
 
 	char *line1 = NULL;
-	line1 = get_next_line(1000);
+	line1 = get_next_line(fd1);
 	printf("next line fd1: %s", line1);
 	free(line1);
 	line1 = NULL;
@@ -105,7 +105,7 @@ int main(void)
 /*
 	TO CLEAN STILL REACHABLE STATIC MEMORY
 
-FOR MAIN: 
+FOR MAIN:
 
 	get_next_line(-3); // CLEAN STATIC BUFFERS ON EXIT
 

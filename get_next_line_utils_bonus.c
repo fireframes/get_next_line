@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 20:33:01 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/27 21:13:52 by mmaksimo         ###   ########.fr       */
+/*   Created: 2024/03/28 18:39:47 by mmaksimo          #+#    #+#             */
+/*   Updated: 2024/03/28 20:48:04 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(char *s)
 {
