@@ -6,17 +6,17 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 22:34:10 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/25 23:23:01 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/27 22:35:43 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 4
+# define BUFFER_SIZE 42
 #endif
 
-char	*process_buffer(char *buffer, char *line, char *sep)
+char	*append_buffer(char *buffer, char *line, char *sep)
 {
 	char	*temp_line;
 	char	*old_line;
@@ -56,7 +56,7 @@ char	*get_next_line(int fd)
 		if (nl_ptr)
 		{
 			*nl_ptr = '\0';
-			line = process_buffer(buffer, line, "\n");
+			line = append_buffer(buffer, line, "\n");
 			if (!line)
 				return (NULL);
 			ft_memmove(buffer, nl_ptr + 1, ft_strlen(nl_ptr + 1) + 1);
@@ -64,16 +64,13 @@ char	*get_next_line(int fd)
 		}
 		else
 		{
-			line = process_buffer(buffer, line, "");
+			line = append_buffer(buffer, line, "");
 			if (!line)
 				return (NULL);
 			buffer[0] = '\0';
 		}
 	}
 	if (read_ret == -1)
-	{
-		buffer[0] = '\0';
 		return (NULL);
-	}
 	return (line);
 }

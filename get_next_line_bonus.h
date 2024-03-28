@@ -6,7 +6,7 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 20:32:42 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/26 16:31:55 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/27 21:30:19 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(char *s);

@@ -6,13 +6,11 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 22:34:10 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/26 23:09:53 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/27 22:18:06 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-#include <limits.h>
-#include <stdio.h>
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 1
@@ -20,36 +18,33 @@
 
 char	*append_buffer(char *buffer, char *line, char *sep)
 {
-	char	*temp_line = NULL;
-	char	*new_line = NULL;
+	char	*temp_line;
+	char	*old_line;
 
 	temp_line = ft_strjoin(buffer, sep);
 	if (!temp_line)
 		return (NULL);
-	// old_line = line;
-	new_line = ft_strjoin(line, temp_line);
-	if (!new_line)
+	old_line = line;
+	line = ft_strjoin(line, temp_line);
+	if (!line)
 		return (NULL);
-	// free(old_line);
+	free(old_line);
 	free(temp_line);
-	temp_line = NULL;
-	free(line);
-	line = NULL;
-	return (new_line);
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer[_SC_OPEN_MAX + 1];//[BUFFER_SIZE + 1];
+	static char	*buffer[FOPEN_MAX];
 	char		*line;
 	char		*nl_ptr;
 	ssize_t		read_ret;
 
 
 	line = NULL;
-	if (fd < 0)
+	if (fd < 0 || fd > FOPEN_MAX)
 		return (NULL);
-	if (!buffer[fd])
+	if (buffer[fd] == NULL)
 	{
 		buffer[fd] = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (buffer[fd] == NULL)
@@ -89,14 +84,6 @@ char	*get_next_line(int fd)
 		buffer[fd] = NULL;
 	}
 	if (read_ret == -1)
-	{
-		// buffer[fd][0] = '\0';
-		// if (buffer[fd])
-		// {
-		// 	free(buffer[fd]);
-		// 	buffer[fd] = NULL;
-		// }
 		return (NULL);
-	}
 	return (line);
 }
